@@ -1,16 +1,23 @@
 ---
-title: API Reference
+title: SensorThings .NET Library Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
+  - csharp: C#
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - things
+  - locations
+  - historicallocations
+  - datastreams
+  - sensors
+  - observedproperties
+  - observations
+  - featuresofinterest
+  - supportivefunctions
   - errors
 
 search: true
@@ -18,151 +25,44 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the SensorThings .NET Library based on SensorThings API. This library allows clients to easily connect with the SensorThings API. This library allows clients to retrieve information that is parsed and can be used in their project. 
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This document provides guidance for developers on how to use the library in their project. This documents shows how to retrieve specific information from each method. 
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Requirements
 
-# Authentication
+In order to use this library, the developer must have the following tools:
 
-> To authorize, use this code:
+- .NET framework 4.5
+- Microsoft Visual Studio 2013 (or later version). You can use the free Express version or you can use Xamarin (for MAC).
+- The application should be written in C# language.
 
-```ruby
-require 'kittn'
+# Installation
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+> Add the following dependencies to your file:
+
+```csharp
+
+using OGCSensorThingsClassLibrary;
+using Newtonsoft.Json;
+using Newtonsoft;
+
 ```
 
-```python
-import kittn
+In order to use this library, you must add it into your project. The following steps describe how to include the library: 
 
-api = kittn.authorize('meowmeowmeow')
-```
+1. Start new C# Desktop or Web application in Visual Studio 2013 or Xamarin.
+2. Right click on the References tab of your application, and then click Add Reference...
+3. In the Reference Manager window, click on 'Browse', then navigate to:
+OGCSensorThingsClassLibrary > OGCSensorThingsClassLibrary > bin/Debug
+4. In the bin/Debug folder you will find two dll files: Newtonsoft.Json.dll and OGCSensorThingsClassLibrary.dll. Add both of them as new references. 
+You can also add the Newtonsoft library by going to the package folder, right-click and select "add package", type in the search bar "newtonsoft", and add the first item to the project. 
+5. Add the following in the top of each .cs file where you will use the library classes or methods:
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+# Methods
 
-> Make sure to replace `meowmeowmeow` with your API key.
+The following sections describe each method that is available for use in the library. It defines the parameters as well as the return types of each method. It also shows segments of code as well as a expected output. 
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
 
